@@ -43,7 +43,6 @@ const BookingModal = ({
     const newInfo = { ...bookingInfo };
     newInfo[field] = value;
     setBookingInfo(newInfo);
-    console.log(newInfo);
   };
 
   const handleBookSubmit = (e) => {

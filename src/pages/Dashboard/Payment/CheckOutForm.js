@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth"
 
 const CheckOutForm = ({ appointment }) => {
+  console.log(appointment);
   const {patientName, price , _id } = appointment;
   const stripe = useStripe();
   const elements = useElements();
@@ -15,7 +16,7 @@ const CheckOutForm = ({ appointment }) => {
   const [processing,setProcessing] = useState(false)
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://immense-river-34161.herokuapp.com/create-payment-intent", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -76,7 +77,7 @@ const CheckOutForm = ({ appointment }) => {
           last4 :paymentMethod.card.last4,
           transaction: paymentIntent.client_secret.slice("_secret")[0]
        }
-      const url = `http://localhost:5000/appointment/${_id}`;
+      const url = `https://immense-river-34161.herokuapp.com/appointment/${_id}`;
       fetch(url,{
         method:"PUT",
         headers : {"content-type": "application/json"},
