@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import useAuth from "../../../hooks/useAuth";
-import { jsonEval } from "@firebase/util";
 
 const style = {
   position: "absolute",
@@ -28,7 +27,7 @@ const BookingModal = ({
   date,
   setBookingSuccess,
 }) => {
-  const { name, space, time } = booking;
+  const { name,  time ,price} = booking;
   const { user } = useAuth();
 
   const initializeInfo = {
@@ -53,8 +52,9 @@ const BookingModal = ({
     const appointment = {
       ...bookingInfo,
       time,
+      price,
       serviceName: name,
-      date: date.toLocaleDateString(),
+      date: date?.toLocaleDateString(),
     };
     // send data to server
     console.log(appointment);

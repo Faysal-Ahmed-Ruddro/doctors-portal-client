@@ -7,6 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { NavLink } from "react-router-dom";
 
 const Appointments = ({date}) => {
   const { user ,token} = useAuth();
@@ -14,7 +15,7 @@ const Appointments = ({date}) => {
   useEffect(() => {
     const url = `https://immense-river-34161.herokuapp.com/appointments?email=${
       user.email
-    }&date=${date.toLocaleDateString()}`;
+    }&date=${date?.toLocaleDateString()}`;
     fetch(url,{
       headers: { "authorization" : `Bearer ${token}`}
     })
@@ -29,10 +30,10 @@ const Appointments = ({date}) => {
           <TableHead>
             <TableRow>
               <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Email</TableCell>
-              <TableCell align="center">Phone</TableCell>
+              <TableCell align="center">Service</TableCell>
               <TableCell align="center">Time</TableCell>
               <TableCell align="center">Date</TableCell>
+              <TableCell align="center">Aciton</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -44,10 +45,18 @@ const Appointments = ({date}) => {
                 <TableCell component="th" scope="row">
                   {appointment?.patientName}
                 </TableCell>
-                <TableCell align="right">{appointment?.email}</TableCell>
-                <TableCell align="right">{appointment?.phone}</TableCell>
+                <TableCell align="right">{appointment?.serviceName}</TableCell>
                 <TableCell align="right">{appointment?.time}</TableCell>
                 <TableCell align="right">{appointment?.date}</TableCell>
+                <TableCell align="right">
+                  {appointment?.payment ? (
+                    "Paid"
+                  ) : (
+                    <NavLink to={`dashboard/payment/${appointment._id}`}>
+                      <button> Pay </button>{" "}
+                    </NavLink>
+                  )}{" "}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
