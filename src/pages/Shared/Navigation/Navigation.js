@@ -29,6 +29,12 @@ const Navigation = () => {
           </Typography>
           <NavLink
             style={{ textDecoration: "none", color: "#fff" }}
+            to="/home"
+          >
+            <Button color="inherit"> HOME </Button>
+          </NavLink>
+          <NavLink
+            style={{ textDecoration: "none", color: "#fff" }}
             to="/appointment"
           >
             <Button color="inherit"> APPOINTMENT </Button>
